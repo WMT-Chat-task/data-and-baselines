@@ -69,6 +69,6 @@ python contextualizer.py split \
   --block-info /tmp/block_info 
 
 python score.py \
-  ${extracted_dir}/dev.${tgt_lang} ${predictions_dir}/dev.pred.${tgt_lang} \
-  --src ${extracted_dir}/dev.${tgt_lang} \
+  ${predictions_dir}/dev.pred.${tgt_lang} ${extracted_dir}/dev.${tgt_lang} \
+  --src ${extracted_dir}/dev.${src_lang} \
   --comet-dir $COMET_DIR
