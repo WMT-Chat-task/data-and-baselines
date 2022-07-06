@@ -52,6 +52,7 @@ wget https://dl.fbaipublicfiles.com/m2m_100/data_dict.128k.txt
 wget https://dl.fbaipublicfiles.com/m2m_100/model_dict.128k.txt
 wget https://dl.fbaipublicfiles.com/m2m_100/language_pairs_small_models.txt 
 wget https://dl.fbaipublicfiles.com/m2m_100/418M_last_checkpoint.pt model.pt
+cd ../..
 ```
 
 ### Running baselines
