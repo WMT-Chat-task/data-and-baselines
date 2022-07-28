@@ -73,3 +73,24 @@ You can run a sweep over multiple models, context sizes and language pairs by ru
 ```bash
 ducttape main.tape -j $NUM_PARALLEL
 ```
+
+## Submissions converter
+Once you get the MT outputs (detruecased, detokenized, etc) you need to add them to the original test CSV file in an extra column, called `mt_segment`.
+For this, you can use the `prepare-submission.py` script:
+
+```
+python prepare-submission.py \
+--csv-file <The original testset CSV FILE> \
+--hyp-file <The MT output> \
+--output-dir <OUTPUT DIRECTORY> \
+--directions <DIRECTIONS>
+```
+
+`<The original testset CSV FILE>`: Is the file that you downloaded from the repo containing these columns: `doc_id`,`source_language`,`target_language`,`source_segment`,`translation_direction`.
+
+`<The MT output>`: This file contains the outputs of your MT system after all the postprocessing steps (detruecasing, detokenization, etc). It should contain the translations of the input segments, one per line. In case you are translating both directions at the same time, the translations need to be in the same order as they appear in source side. If you are translating each direction separately, then you will need to call the converter twice, each time with the corresponding MT output and direction (i.e. `customer`|`agent`).
+For the file names please check the **Submission Format** section of [our webpage](https://wmt-chat-task.github.io).
+
+`<OUTPUT DIRECTORY>`: The directory to store the final submission files (in CSV format).
+
+`<DIRECTIONS>`: Can take either of `customer` or `agent`. In case your MT output contains the translations of both directions (in the original order of the inputs) you need to specify both directions (i.e. `--directions customer agent`).
